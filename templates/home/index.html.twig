@@ -1,11 +1,60 @@
 {% extends "base.html.twig" %}
 
-{% block title %} {{ title }} {% endblock  %}
-
+{% block title %}
+	{{ title }}
+{% endblock  %}
 
 
 {% block body %}
 
-<h1> {{ message }} </h1>
+	<h1>
+		{{ message }}
+	</h1>
 
-{% endblock  %}
+	<div class="row mb-3">
+		{{ form_start(form)}}
+
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-3">
+						{{form_row(form.minSurface)}}
+					</div>
+					<div class="col-md-3">
+						{{form_row(form.minChambre)}}
+					</div>
+					<div class="col-md-3">
+						{{form_row(form.minCouchage)}}
+					</div>
+					<div class="col-md-3 mt-4">
+				<input type="submit" class="btn btn-primary" value="Rechercher">
+					</div>
+				</div>
+			</div>
+		</div>
+		{{form_end(form)}}
+	</div>
+
+	<div clas="row">
+		<div class="row">
+			{% for gite in gites %}
+
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="..." alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">{{ gite.nom }}</h5>
+							<p class="card-text">
+							{{ gite.description }}
+							{{ gite.surface }} m² - {{ gite.chambre }} ch    - {{ gite.couchage }} lits
+							</p>
+					
+							<a href="{{path('gite_show', {id: gite.id})}}" class="btn btn-primary">Voir</a>
+						</div>
+					</div>
+				</div>
+
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
